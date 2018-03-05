@@ -5,8 +5,16 @@ var express = require('express');
 var app = express();    //调用
 //设置请求方式
 app.use(express.static("html"));
+app.use(express.static("photo"));
 //app.use(express.static("html"))
-app.get('/',function(req,res){
+app.get('/photolist',function(req,res){
+
+    var user =req.query.a;
+    fs.readdir("./photo/" + user,function(err,files){
+      res.json(files)
+    })
+ })
+app.get('/list',function(req,res){
     fs.readdir("./photo","utf8",function(err, a){
       //  console.log(files)
       res.json(a)

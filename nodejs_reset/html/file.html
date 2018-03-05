@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <title>Bootstrap 101 Template</title>
+    
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+        <nav class="navbar navbar-default">
+              <div class="container">
+                  <!-- Brand and toggle get grouped for better mobile display -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">小小相册</a>
+                  </div>
+                  <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                      <li><a href="index.html">首页 <span class="sr-only">(current)</span></a></li>
+                      <li class="active"><a href="file.html">上传</a> </li>
+                    </ul>
+                  </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+              </nav>
+
+              <div class="container">
+                <h4 style="font-weight:bold">选择文件夹</h4>
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" id="btns" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      jack
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="listFolder">
+                      
+                        
+                    </ul>
+                </div>    
+                <form>
+                    <div class="form-group">
+                        <h5 style="font-weight:bold">选择图片</h5>
+                        <p style="font-size:13px">尺寸小于2M</p>
+                      <!-- <label for="exampleInputFile">选择文件夹</label> -->
+                      <input type="file" id="exampleInputFile">
+    
+                    </div>
+                    <!-- <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> Check me out
+                      </label>
+                    </div> -->
+                    <button type="submit" class="btn btn-default">上传</button>
+                </form>
+              </div>
+   
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+<script>
+ //请求出文件夹的列表
+   // alert("haha")
+   $.ajax({
+    url:"/list",
+    success:function(data){
+     // alert(data)
+     var arr = data;
+     var w = "";
+     for(var i=0;i<arr.length;i++){
+       //console.log(arr[i])
+        w += `
+        <li><a href="#">`+ arr[i] +`</a></li>
+        `
+     }
+
+     $("#listFolder").html(w)
+    }
+   })
+  //上面的无法点击切换文件夹的名字，所以还需要借助下面的代码
+  //给所有的li添加onclick事件处理函数。
+  // console.log("haha01")           程序走到这了。。
+  console.log($("li"))               //
+  console.log($("#listFolder"))
+  console.log($("#listFolder li"))   //打印有问题，没有三个li标签     ？？？
+  
+  $("#listFolder li").click(function(){
+    console.log("haha")  // 未进来程序                  ？？？？？？？？
+    // alert()
+            // this  当前元素对象 DOM对象
+            // $(this) 转换为 jQuery 对象
+            // .find("a") 获取 jQuery对象 下面的 标签名为 a 的所有子元素
+            // .html() 内容
+      var text = $(this).find("a").html();
+      $("#btns").html(text);
+  })
+</script>
