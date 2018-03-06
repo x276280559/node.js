@@ -51,13 +51,17 @@
                       
                         
                     </ul>
-                </div>    
-                <form>
+                </div> 
+                <!-- action   代表提交给后台的地址 -->
+                <!-- method  提交给后台的方式 -->
+                 <!-- enctype="multipart/form-data"    说明是采用二进制形式传输数据 -->
+                <form action="/upload" method="get" enctype="multipart/form-data">
+                  <!-- <input type="text" value="01" name="a" />       模拟编写的代码 -->
                     <div class="form-group">
                         <h5 style="font-weight:bold">选择图片</h5>
                         <p style="font-size:13px">尺寸小于2M</p>
-                      <!-- <label for="exampleInputFile">选择文件夹</label> -->
-                      <input type="file" id="exampleInputFile">
+                      
+                      <input type="file" id="exampleInputFile" name = "tp">
     
                     </div>
                     <!-- <div class="checkbox">
@@ -92,23 +96,39 @@
      }
 
      $("#listFolder").html(w)
+
+      $("#listFolder li").click(function(){
+      //console.log("haha")  // 未进来程序                  ？？？？？？？？
+      // alert()
+              // this  当前元素对象 DOM对象
+              // $(this) 转换为 jQuery 对象
+              // .find("a") 获取 jQuery对象 下面的 标签名为 a 的所有子元素
+              // .html() 内容
+       var text = $(this).find("a").html();
+       $("#btns").html(text);
+      })
     }
    })
   //上面的无法点击切换文件夹的名字，所以还需要借助下面的代码
   //给所有的li添加onclick事件处理函数。
+
+
+
+      //注意：这个请求不能放到ajax后面去，不然请求不到那个li。。。。
+
   // console.log("haha01")           程序走到这了。。
-  console.log($("li"))               //
-  console.log($("#listFolder"))
-  console.log($("#listFolder li"))   //打印有问题，没有三个li标签     ？？？
-  
-  $("#listFolder li").click(function(){
-    console.log("haha")  // 未进来程序                  ？？？？？？？？
-    // alert()
-            // this  当前元素对象 DOM对象
-            // $(this) 转换为 jQuery 对象
-            // .find("a") 获取 jQuery对象 下面的 标签名为 a 的所有子元素
-            // .html() 内容
-      var text = $(this).find("a").html();
-      $("#btns").html(text);
-  })
+  // console.log($("li"))               //
+  // console.log($("#listFolder"))
+  // console.log($("#listFolder li"))   //打印有问题，没有三个li标签     ？？？
+  // $("#listFolder li").click(function(){
+  //     //console.log("haha")  // 未进来程序                  ？？？？？？？？
+  //      alert()
+  //             // this  当前元素对象 DOM对象
+  //             // $(this) 转换为 jQuery 对象
+  //             // .find("a") 获取 jQuery对象 下面的 标签名为 a 的所有子元素
+  //             // .html() 内容
+  //      var text = $(this).find("a").html();
+  //      $("#btns").html(text);
+  //     })
+ 
 </script>
